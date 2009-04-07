@@ -1,0 +1,13 @@
+config1:
+  K_PATH_MAIN: kiokoko
+  K_PATH_URL: dff
+  K_PATH_FONTS: fdsf
+  K_PATH_CACHE: sdfsd
+  K_PATH_URL_CACHE: fsdfsd
+  K_PATH_IMAGES: gdfg
+  K_BLANK_IMAGE: dgdfgdf
+
+# Other configs
+
+config2:
+# ...

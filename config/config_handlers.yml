@@ -1,0 +1,2 @@
+config/pdf_configs.yml:
+  class: sfTCPDFPluginConfigHandler
