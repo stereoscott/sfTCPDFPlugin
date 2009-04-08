@@ -3,9 +3,6 @@
 /**
  * This class handles the configuration of the plugin.
  * 
- * /!\ The 1.2 is still under dev, it is not working yet. /!\ 
- * 
- * @see config/config_handlers.yml
  * @see config/pdf_configs.yml
  *
  * @package    sfTCPDFPlugin
@@ -65,7 +62,7 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
   /**
    * Generate the config file if not present and return a configuration for
    * a given key or return the default configuration.
-   * 
+   * s
    * @author COil
    * @since  V1.6.0 - 7 apr 09
    * 
@@ -90,11 +87,6 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
    */
   public static function applyTCPDFConfig($config)
   {
-    if (!sfConfig::get('sfTCPDFPlugin_dir'))
-    {
-      sfConfig::set('sfTCPDFPlugin_dir', sfConfig::get('sf_root_dir'). DIRECTORY_SEPARATOR. 'plugins'. DIRECTORY_SEPARATOR. 'sfTCPDFPlugin'. DIRECTORY_SEPARATOR. 'lib'. DIRECTORY_SEPARATOR. 'tcpdf'. DIRECTORY_SEPARATOR);
-    }
-
     foreach ($config as $key => $value)
     {
       switch ($key)
@@ -118,8 +110,7 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
         case 'K_PATH_URL':
           if (empty($value) && sfContext::hasInstance())
           {
-            $request = sfContext::getInstance()->getRequest(); 
-            $value = $request->getUriPrefix(). '/';
+            $request = sfContext::getInstance()->getRequest()->getUriPrefix(). '/'; 
           }
 
           define('K_PATH_URL', $value);
@@ -131,7 +122,7 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
             $value = K_PATH_MAIN.'fonts/';
           }
 
-          define ('K_PATH_FONTS', $value);
+          define('K_PATH_FONTS', $value);
           break;
           
         case 'K_PATH_CACHE':
@@ -140,7 +131,7 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
             $value = K_PATH_MAIN.'cache/';
           }
 
-          define ('K_PATH_CACHE', $value);
+          define('K_PATH_CACHE', $value);
           break;
 
         case 'K_PATH_URL_CACHE':
@@ -149,7 +140,7 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
             $value = K_PATH_URL. 'cache/';
           }
 
-          define ('K_PATH_URL_CACHE', $value);
+          define('K_PATH_URL_CACHE', $value);
           break;
           
         case 'K_PATH_IMAGES':
@@ -158,7 +149,7 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
             $value = K_PATH_MAIN. 'images/';
           }
 
-          define ('K_PATH_IMAGES', $value);
+          define('K_PATH_IMAGES', $value);
           break;
           
         case 'K_BLANK_IMAGE':
@@ -167,15 +158,15 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
             $value = K_PATH_MAIN. 'images/';
           }
 
-          define ('K_BLANK_IMAGE', K_PATH_IMAGES.'_blank.png');
+          define('K_BLANK_IMAGE', K_PATH_IMAGES.'_blank.png');
           break;
           
         default:
 
-          // Only define a constant if it's TCPDF known constant
+          // Only define a constant if it's a known TCPDF constant
           if (in_array($key, self::getTCPDFConstantsList()))
           {
-            define ($key, $value); 
+            define($key, $value); 
           }
           
           break;
@@ -261,5 +252,23 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
       'K_TITLE_MAGNIFICATION',
       'K_SMALL_RATIO'
     );
+  }
+  
+  /**
+   * Retrieve the list of know TCPDF constants with their values if defined.
+   *  
+   * @return Array
+   */
+  public static function getTCPDFConstantsValues()
+  {
+    $constants = self::getTCPDFConstantsList();
+    $values = array();
+    
+    foreach ($constants as $constant)
+    {
+      $values[$constant] = defined($constant) ? constant($constant) : 'This TCPDF constant is not defined';
+    }
+    
+    return $values;
   }
 }

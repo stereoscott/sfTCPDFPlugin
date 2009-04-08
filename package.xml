@@ -81,9 +81,11 @@
       <date>2009-04-02</date>
       <license>MIT</license>
       <notes>
-        * New configuration handler that allows to use multiple configs when generating pdf
-        * New version for symfony 1.2
+        * Added a method to get the final TCPDF configuration
+        * Deleted old config.php      
+        * New plugin configuration handler that allows you to use multiple configs for different actions and pdf
         * Reorganized svn structure of the plugin, created 1.0, 1.1 and 1.2 branch
+        * New version for symfony 1.2
       </notes>
     </release>  
   </changelog>
