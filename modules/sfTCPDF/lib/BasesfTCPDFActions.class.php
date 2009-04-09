@@ -17,8 +17,6 @@ class BasesfTCPDFActions extends sfActions
   {
     $config = sfTCPDFPluginConfigHandler::loadConfig();
     
-    //mzTools::dump($config, '$config', true);
-    
     // pdf object
     $pdf = new sfTCPDF();
 
@@ -43,8 +41,6 @@ class BasesfTCPDFActions extends sfActions
 
   /**
    * Full test.
-   *
-   * It's the test that is bundled in /tcpdf/test_unicode.php
    */
   public function executeTest2()
   {

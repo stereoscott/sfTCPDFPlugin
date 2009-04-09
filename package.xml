@@ -2,7 +2,11 @@
 <package packagerversion="1.4.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
   <name>sfTCPDFPlugin</name>
   <channel>pear.symfony-project.com</channel>
-  <summary>The sfTCPDFPlugin allows you to generate PDF documents with the help of the TCPDF library.</summary>
+  <summary>
+    The sfTCPDFPlugin allows you to generate PDF documents with the help of the TCPDF library. 
+    It comes with a config handler that allows you to manage several TCPDF configurations
+    in a smfony YAML config file. 
+  </summary>
   <description>The sfTCPDFPlugin provides abstraction for the TCPDF library. The main interest of this FPDF "fork" resides in the fact that it handles any UTF8 strings witch the native encoding format used by symfony.</description>
   <lead>
     <name>Vernet Loïc</name>
@@ -10,7 +14,7 @@
     <email>qrf_coil@yahoo.fr</email>
     <active>yes</active>
   </lead>
-  <date>2009-04-07</date>
+  <date>2009-04-09</date>
   <version>
     <release>1.6.0</release>
     <api>1.6.0</api>
@@ -24,10 +28,15 @@
   <contents>
     <dir name="/">
       <dir name="config">
-        <file name="config.php" role="data" />
+        <file name="config_handlers.yml" role="data" />
+        <file name="pdf_configs.yml" role="data" />
+        <file name="routing.yml" role="data" />
       </dir>
       <dir name="lib">
         <file name="sfTCPDF.class.php" role="data" />
+        <dir name="config">
+          <file name="sfTCPDFPluginConfigHandler.class.php" role="data" />
+        </dir>
       </dir>
       <dir name="modules">
         <dir name="sfTCPDF">
