@@ -5,7 +5,7 @@
   <summary>
     The sfTCPDFPlugin allows you to generate PDF documents with the help of the TCPDF library. 
     It comes with a config handler that allows you to manage several TCPDF configurations
-    in a smfony YAML config file. 
+    in a symfony YAML config file. 
   </summary>
   <description>The sfTCPDFPlugin provides abstraction for the TCPDF library. The main interest of this FPDF "fork" resides in the fact that it handles any UTF8 strings witch the native encoding format used by symfony.</description>
   <lead>
@@ -87,7 +87,7 @@
        <api>stable</api>
       </stability>
       <license uri="http://www.symfony-project.com/license">MIT license</license>
-      <date>2009-04-02</date>
+      <date>2009-04-09</date>
       <license>MIT</license>
       <notes>
         * Added a method to get the final TCPDF configuration
