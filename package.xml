@@ -14,7 +14,7 @@
     <email>qrf_coil@yahoo.fr</email>
     <active>yes</active>
   </lead>
-  <date>2009-04-09</date>
+  <date>2009-04-11</date>
   <version>
     <release>1.6.0</release>
     <api>1.6.0</api>
@@ -87,9 +87,10 @@
        <api>stable</api>
       </stability>
       <license uri="http://www.symfony-project.com/license">MIT license</license>
-      <date>2009-04-09</date>
+      <date>2009-04-11</date>
       <license>MIT</license>
       <notes>
+        * Converted README to Markdow
         * Added a method to get the final TCPDF configuration
         * Deleted old config.php      
         * New plugin configuration handler that allows you to use multiple configs for different actions and pdf
