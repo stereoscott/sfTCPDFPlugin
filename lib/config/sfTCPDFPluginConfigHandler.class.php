@@ -2,7 +2,7 @@
 
 /**
  * This class handles the configuration of the plugin.
- * 
+ *
  * @see config/pdf_configs.yml
  *
  * @package    sfTCPDFPlugin
@@ -13,9 +13,9 @@
 class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
 {
   // Namespace of plugin configuration
-  protected static 
-    $namespace           = 'sfTCPDFPlugin',
-    $config_file_pattern = 'config/pdf_configs.yml';
+  protected static
+  $namespace           = 'sfTCPDFPlugin',
+  $config_file_pattern = 'config/pdf_configs.yml';
 
   /**
    * Specific yml parse function.
@@ -36,20 +36,20 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
               "//\n";
 
     $retval = sprintf($retval, __CLASS__, date('Y/m/d H:i:s'), var_export($config, true));
-    
+
     return $retval;
   }
 
   /**
    * Load the config.
-   * 
+   *
    * @author COil
    * @since  6 august 08
-   */  
+   */
   public static function load($config_key)
   {
     $config = sfConfig::get(self::$namespace);
-    
+
     if (!$config)
     {
       $config = self::checkAndGetConfig($config_key);
@@ -62,24 +62,25 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
   /**
    * Generate the config file if not present and return a configuration for
    * a given key or return the default configuration.
-   * s
+   * 
    * @author COil
    * @since  V1.6.0 - 7 apr 09
-   * 
+   *
    * @param $config String Config key
-   * 
+   *
    * @return Array
    */
   public static function checkAndGetConfig($config = null)
   {
     $configs = include(sfContext::getInstance()->getConfigCache()->checkConfig(self::$config_file_pattern));
+    $checkAndGetConfig = $config && isset($configs[$config]) ? $configs[$config] : $configs['default'];
 
-    return $config && isset($configs[$config]) ? $configs[$config] : $configs['default'];
+    return $checkAndGetConfig;
   }
 
   /**
    * Create all TCPDF specific constants.
-   * 
+   *
    * @author COil
    * @since  V1.6.0 - 7 apr 09
    *
@@ -94,10 +95,10 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
         case 'K_TCPDF_EXTERNAL_CONFIG':
           if ($value)
           {
-            define('K_TCPDF_EXTERNAL_CONFIG', true); 
+            define('K_TCPDF_EXTERNAL_CONFIG', true);
           }
           break;
-          
+
         case 'K_PATH_MAIN':
           if (empty($value))
           {
@@ -106,16 +107,17 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
 
           define('K_PATH_MAIN', $value);
           break;
-          
+
         case 'K_PATH_URL':
+          
           if (empty($value) && sfContext::hasInstance())
           {
-            $request = sfContext::getInstance()->getRequest()->getUriPrefix(). '/'; 
+            $value = sfContext::getInstance()->getRequest()->getUriPrefix(). '/';
           }
 
           define('K_PATH_URL', $value);
           break;
-          
+
         case 'K_PATH_FONTS':
           if (empty($value))
           {
@@ -124,7 +126,7 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
 
           define('K_PATH_FONTS', $value);
           break;
-          
+
         case 'K_PATH_CACHE':
           if (empty($value))
           {
@@ -139,10 +141,9 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
           {
             $value = K_PATH_URL. 'cache/';
           }
-
           define('K_PATH_URL_CACHE', $value);
           break;
-          
+
         case 'K_PATH_IMAGES':
           if (empty($value))
           {
@@ -151,7 +152,7 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
 
           define('K_PATH_IMAGES', $value);
           break;
-          
+
         case 'K_BLANK_IMAGE':
           if (empty($value))
           {
@@ -160,15 +161,15 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
 
           define('K_BLANK_IMAGE', K_PATH_IMAGES.'_blank.png');
           break;
-          
+
         default:
 
           // Only define a constant if it's a known TCPDF constant
           if (in_array($key, self::getTCPDFConstantsList()))
           {
-            define($key, $value); 
+            define($key, $value);
           }
-          
+
           break;
       }
     }
@@ -176,7 +177,7 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
 
   /**
    * Retrieve and load a TCPDF configuration.
-   *  
+   *
    * @param $config String Name of config to load ("default" by default)
    */
   public static function loadConfig($config_key = null)
@@ -184,15 +185,15 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
     $config = self::checkAndGetConfig($config_key);
     self::applyTCPDFConfig($config);
     sfConfig::set(self::$namespace, $config);
-    
+
     return $config;
   }
-  
+
   /**
    * Include a TCPDF language file, if the language file the culture is not founf
    * then the defaut language is included (en)
-   *  
-   * @param $culture Language to inlcude 
+   *
+   * @param $culture Language to inlcude
    */
   public static function includeLangFile($culture)
   {
@@ -207,12 +208,12 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
       : $culture_to_lang_file['en']
     ;
 
-    require_once(K_PATH_MAIN. 'config/lang/'. $lang_file. '.php'); 
+    require_once(K_PATH_MAIN. 'config/lang/'. $lang_file. '.php');
   }
-  
+
   /**
    * Retrieve the list of know TCPDF constant.
-   *  
+   *
    * @return Array
    */
   public static function getTCPDFConstantsList()
@@ -251,24 +252,24 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
       'K_CELL_HEIGHT_RATIO',
       'K_TITLE_MAGNIFICATION',
       'K_SMALL_RATIO'
-    );
+      );
   }
-  
+
   /**
    * Retrieve the list of know TCPDF constants with their values if defined.
-   *  
+   *
    * @return Array
    */
   public static function getTCPDFConstantsValues()
   {
     $constants = self::getTCPDFConstantsList();
     $values = array();
-    
+
     foreach ($constants as $constant)
     {
       $values[$constant] = defined($constant) ? constant($constant) : 'This TCPDF constant is not defined';
     }
-    
+
     return $values;
   }
 }

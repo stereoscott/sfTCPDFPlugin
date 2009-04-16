@@ -14,10 +14,10 @@
     <email>qrf_coil@yahoo.fr</email>
     <active>yes</active>
   </lead>
-  <date>2009-04-11</date>
+  <date>2009-04-16</date>
   <version>
-    <release>1.6.0</release>
-    <api>1.6.0</api>
+    <release>1.6.1</release>
+    <api>1.6.1</api>
   </version>
   <stability>
     <release>stable</release>
@@ -28,6 +28,7 @@
   <contents>
     <dir name="/">
       <dir name="config">
+        <file name="config.php" role="data" />
         <file name="config_handlers.yml" role="data" />
         <file name="pdf_configs.yml" role="data" />
         <file name="routing.yml" role="data" />
@@ -36,7 +37,7 @@
         <dir name="config">
           <file name="sfTCPDFPluginConfigHandler.class.php" role="data" />
         </dir>
-        <file name="sfTCPDF.class.php" role="data" />
+        <file name="sfTCPDF.class.php" role="data" />        
       </dir>
       <dir name="modules">
         <dir name="sfTCPDF">
@@ -77,6 +78,23 @@
   </dependencies>
   <phprelease />
   <changelog>
+    <release>
+      <version>
+        <release>1.6.1</release>
+        <api>1.6.1</api>
+      </version>
+      <stability>
+       <release>stable</release>
+       <api>stable</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT license</license>
+      <date>2009-04-16</date>
+      <license>MIT</license>
+      <notes>
+        * Corrected config loader
+        * Restored config.php 
+      </notes>
+    </release>  
     <release>
       <version>
         <release>1.6.0</release>
