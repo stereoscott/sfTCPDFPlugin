@@ -274,7 +274,12 @@ Demo
 If you want to run the tests, enable the `sfTCPDF` module in your `settings.yml`
 file, then call `sfTCPDF/test` or `sfTCPDF/test2`. (If you have desactivated the 
 default symfony routes, a `routing.yml` file is included in the `config` folder
-of the plugin. 
+of the plugin.
+ 
+You can also check the online demos on my blog:
+ 
+* [Basic example](http://snippets.strangebuzz.com/sfTCPDF/test)
+* [Advanced example](http://snippets.strangebuzz.com/sfTCPDF/test2)  
    
 Notes
 =====
