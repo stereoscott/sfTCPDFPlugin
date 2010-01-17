@@ -4,7 +4,7 @@
  * Base sfTCPDF actions for demos.
  *
  * @package    sfTCPDFPlugin
- * @author     Vernet LoÃ¯c aka COil <qrf_coil@yahoo.fr>
+ * @author     Vernet Loïc aka COil <qrf_coil@yahoo.fr>
  * @since      1.6.0 - 16 march 2007
  */
 
@@ -36,7 +36,8 @@ class BasesfTCPDFActions extends sfActions
 
     // output
     $pdf->Output();
-    return sfView::NONE;
+
+    return $this->stopExecution();
   }
 
   /**
@@ -137,9 +138,18 @@ class BasesfTCPDFActions extends sfActions
     $pdf->MultiCell(40, 5, "D test multicell line 1\ntest multicell line 2\ntest multicell line 3", 1, 'J', 0, 2);
     $pdf->MultiCell(40, 5, "F test multicell line 1\ntest multicell line 2\ntest multicell line 3", 1, 'J', 0);
 
-    //Close and output PDF document
+    // Close and output PDF document
     $pdf->Output();
 
+    return $this->stopExecution();
+  }
+
+  /**
+   * Why return sfView::NONE, does not work anymore (neither sfStopExecution)
+   */
+  protected function stopExecution()
+  {
+    //die();
     return sfView::NONE;
   }
 }

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <package packagerversion="1.4.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
   <name>sfTCPDFPlugin</name>
   <channel>pear.symfony-project.com</channel>
@@ -71,13 +71,32 @@
         <name>symfony</name>
         <channel>pear.symfony-project.com</channel>
         <min>1.2.0</min>
-        <max>1.3.0</max>
-        <exclude>1.3.0</exclude>
+        <max>1.5.0</max>
+        <exclude>1.5.0</exclude>
       </package>
     </required>
   </dependencies>
   <phprelease />
   <changelog>
+    <release>
+      <version>
+        <release>1.6.2</release>
+        <api>1.6.2</api>
+      </version>
+      <stability>
+       <release>stable</release>
+       <api>stable</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT license</license>
+      <date>2010-01-17</date>
+      <license>MIT</license>
+      <notes>
+        * Modified return sfView::NONE to die (symfony bug ?)
+        * Tested plugin with TCPDF 4_8_024 (2010-01-15)
+        * Modifications to fit symfony cs
+        * extended with callbacks for header and footer functions added magic functions
+      </notes>
+    </release>  
     <release>
       <version>
         <release>1.6.1</release>
