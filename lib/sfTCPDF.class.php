@@ -53,7 +53,6 @@ class sfTCPDF extends TCPDF
    * @access public
    * @see $headerCallback
    */
-  /*
   public function Header()
   {
     if ($this->print_header)
@@ -68,7 +67,6 @@ class sfTCPDF extends TCPDF
       }
     }
   }
-  */
 
   /**
    * This method is used to render the page footer.
@@ -77,7 +75,6 @@ class sfTCPDF extends TCPDF
    * @access public
    * @see $footerCallback
    */
-  /*
   public function Footer()
   {
     if ($this->print_footer)
@@ -92,7 +89,6 @@ class sfTCPDF extends TCPDF
       }
     }
   }
-  */
 
   /**
    * Magic setter.
@@ -100,11 +96,10 @@ class sfTCPDF extends TCPDF
    * @param String $name
    * @param mixed $value
    */
-  /*
   public function __set($name, $value)
   {
     $this->userData[$name] = $value;
-  }*/
+  }
 
   /**
    * Magic getter.
@@ -112,7 +107,6 @@ class sfTCPDF extends TCPDF
    * @param String $name Name of data key to return
    * @return mixed
    */
-  /*
   public function __get($name)
   {
     if (array_key_exists($name, $this->userData))
@@ -127,7 +121,7 @@ class sfTCPDF extends TCPDF
     );
     
     return null;
-  }*/
+  }
 
   /**
    * Test existence of user data.
@@ -135,20 +129,18 @@ class sfTCPDF extends TCPDF
    * @param String $name
    * @return Boolean
    */
-  /*
   public function __isset($name)
   {
     return isset($this->userData[$name]);
-  }*/
+  }
 
   /**
    * Unset user data.
    *
    * @param String $name
    */
-  /*
   public function __unset($name)
   {
     unset($this->userData[$name]);
-  }*/
+  }
 }
