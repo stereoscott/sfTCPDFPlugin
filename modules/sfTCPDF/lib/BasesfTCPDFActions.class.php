@@ -32,12 +32,13 @@ class BasesfTCPDFActions extends sfActions
     // init pdf doc
     $pdf->AliasNbPages();
     $pdf->AddPage();
-    $pdf->Cell(80, 10, "Hello World !!! & Ã© â‚¬ U Ã» ã�„ã‚�ã�¯");
+    $pdf->Cell(80, 10, "Hello World !!! €àèéìòù");
 
     // output
     $pdf->Output();
 
-    return $this->stopExecution();
+    // Stop symfony process
+    throw new sfStopException();
   }
 
   /**
@@ -51,7 +52,7 @@ class BasesfTCPDFActions extends sfActions
     $doc_title    = "test title";
     $doc_subject  = "test description";
     $doc_keywords = "test keywords";
-    $htmlcontent  = "&lt; â‚¬ &euro; &#8364; &amp; Ã¨ &egrave; &copy; &gt;<br /><h1>heading 1</h1><h2>heading 2</h2><h3>heading 3</h3><h4>heading 4</h4><h5>heading 5</h5><h6>heading 6</h6>ordered list:<br /><ol><li><b>bold text</b></li><li><i>italic text</i></li><li><u>underlined text</u></li><li><a href=\"http://www.tecnick.com\">link to http://www.tecnick.com</a></li><li>test break<br />second line<br />third line</li><li><font size=\"+3\">font + 3</font></li><li><small>small text</small></li><li>normal <sub>subscript</sub> <sup>superscript</sup></li></ul><hr />table:<br /><table border=\"1\" cellspacing=\"1\" cellpadding=\"1\"><tr><th>#</th><th>A</th><th>B</th></tr><tr><th>1</th><td bgcolor=\"#cccccc\">A1</td><td>B1</td></tr><tr><th>2</th><td>A2 â‚¬ &euro; &#8364; &amp; Ã¨ &egrave; </td><td>B2</td></tr><tr><th>3</th><td>A3</td><td><font color=\"#FF0000\">B3</font></td></tr></table><hr />image:<br /><img src=\"sfTCPDFPlugin/images/logo_example.png\" alt=\"test alt attribute\" width=\"100\" height=\"100\" border=\"0\" />";
+    $htmlcontent  = "&lt; &euro; €àèéìòù &copy; &gt;<br /><h1>heading 1</h1><h2>heading 2</h2><h3>heading 3</h3><h4>heading 4</h4><h5>heading 5</h5><h6>heading 6</h6>ordered list:<br /><ol><li><b>bold text</b></li><li><i>italic text</i></li><li><u>underlined text</u></li><li><a href=\"http://www.tecnick.com\">link to http://www.tecnick.com</a></li><li>test break<br />second line<br />third line</li><li><font size=\"+3\">font + 3</font></li><li><small>small text</small></li><li>normal <sub>subscript</sub> <sup>superscript</sup></li></ul><hr />table:<br /><table border=\"1\" cellspacing=\"1\" cellpadding=\"1\"><tr><th>#</th><th>A</th><th>B</th></tr><tr><th>1</th><td bgcolor=\"#cccccc\">A1</td><td>B1</td></tr><tr><th>2</th><td>A2 â‚¬ &euro; &#8364; &amp; Ã¨ &egrave; </td><td>B2</td></tr><tr><th>3</th><td>A3</td><td><font color=\"#FF0000\">B3</font></td></tr></table><hr />image:<br /><img src=\"sfTCPDFPlugin/images/logo_example.png\" alt=\"test alt attribute\" width=\"100\" height=\"100\" border=\"0\" />";
 
     //create new PDF document (document units are set by default to millimeters)
     $pdf = new sfTCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true);
@@ -85,7 +86,7 @@ class BasesfTCPDFActions extends sfActions
     $pdf->SetBarcode(date("Y-m-d H:i:s", time()));
 
     // output some HTML code
-    $pdf->writeHTML($htmlcontent, true, 0);
+    $pdf->writeHTML($htmlcontent , true, 0);
 
     // output two html columns
     $first_column_width = 80;
@@ -141,15 +142,7 @@ class BasesfTCPDFActions extends sfActions
     // Close and output PDF document
     $pdf->Output();
 
-    return $this->stopExecution();
-  }
-
-  /**
-   * Why return sfView::NONE, does not work anymore (neither sfStopExecution)
-   */
-  protected function stopExecution()
-  {
-    //die();
-    return sfView::NONE;
+    // Stop symfony process
+    throw new sfStopException();
   }
 }

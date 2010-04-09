@@ -57,7 +57,7 @@ class sfTCPDF extends TCPDF
   {
     if ($this->print_header)
     {
-      if (null !== $this->headerCallback)
+      if (is_null($this->headerCallback))
       {
         parent::Header();
       }
@@ -79,7 +79,7 @@ class sfTCPDF extends TCPDF
   {
     if ($this->print_footer)
     {
-      if (null !== $this->footerCallback)
+      if (is_null($this->footerCallback))
       {
         parent::Footer();
       }

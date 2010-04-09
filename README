@@ -14,12 +14,16 @@ Installation
 
         $ symfony plugin:install sfTCPDFPlugin
 
-   (or download it and unzip in your /plugins directory)
+   (or download it and unzip in your /plugins directory, can also checkout the svn)
+
+    * You can also checkout the svn repository
+      * [symfony 1.0.x](http://svn.symfony-project.com/plugins/sfTCPDFPlugin/branches/1.0/)
+      * [symfony 1.1.x, 1.2.x, 1.3.x, 1.4.x](http://svn.symfony-project.com/plugins/sfTCPDFPlugin/branches/1.2/)
 
  * Download the [TCPDF library](http://sourceforge.net/project/showfiles.php?group_id=128076&package_id=140403)
 
  * Unzip it inside the `/plugins/sfTCPDFplugin/lib` folder, at this point, you 
-   should have a `tcpdf` folder in `/plugins/sfTCPDFPlugin/lib`
+   should have a `tcpdf` folder in `/plugins/sfTCPDFPlugin/lib` (this folder is set as ignored by SVN)
 
  * Publish the assets of the plugin (this is only usefull if you want to test the demos included in the plugin)
   
@@ -110,7 +114,7 @@ The plugin comes with a *default* configuration, but you will surely want to add
       K_SMALL_RATIO: "2/3"
 
 >**Note**
->Check the [TCFP documentation](http://www.tecnick.com/pagefiles/tcpdf/doc/index.html) 
+>Check the [TCPDF documentation](http://www.tecnick.com/pagefiles/tcpdf/doc/index.html)
 >to have more informations about all this parameters.
 
 Usage
@@ -136,10 +140,10 @@ Where `my_config` is the config key name defined in your YAML file. (like above)
         public function executeTest()
         {
           $config = sfTCPDFPluginConfigHandler::loadConfig();
-          
+
           // pdf object
           $pdf = new sfTCPDF();
-      
+
           // settings
           $pdf->SetFont("FreeSerif", "", 12);
           $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
@@ -148,16 +152,18 @@ Where `my_config` is the config key name defined in your YAML file. (like above)
           $pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
           $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
           $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-      
+
           // init pdf doc
           $pdf->AliasNbPages();
           $pdf->AddPage();
-          $pdf->Cell(80, 10, "Hello World !!! & é € U û いろは");
-      
+          $pdf->Cell(80, 10, "Hello World !!! €àèéìòù");
+
           // output
           $pdf->Output();
-          return sfView::NONE;
-        } 
+
+          // Stop symfony process
+          throw new sfStopException();
+        }
 
  * 2 - **Full test** (sfTCPDF/test2)
 
@@ -169,69 +175,67 @@ Where `my_config` is the config key name defined in your YAML file. (like above)
         {
           $config = sfTCPDFPluginConfigHandler::loadConfig();
           sfTCPDFPluginConfigHandler::includeLangFile($this->getUser()->getCulture());
-      
+
           $doc_title    = "test title";
           $doc_subject  = "test description";
           $doc_keywords = "test keywords";
-          $htmlcontent  = "&lt; € &euro; &#8364; &amp; è &egrave; &copy; &gt;<br /><h1>heading 1</h1><h2>heading 2</h2><h3>heading 3</h3><h4>heading 4</h4><h5>heading 5</h5><h6>heading 6</h6>ordered list:<br /><ol><li><b>bold text</b></li><li><i>italic text</i></li><li><u>underlined text</u></li><li><a href=\"http://www.tecnick.com\">link to http://www.tecnick.com</a></li><li>test break<br />second line<br />third line</li><li><font size=\"+3\">font + 3</font></li><li><small>small text</small></li><li>normal <sub>subscript</sub> <sup>superscript</sup></li></ul><hr />table:<br /><table border=\"1\" cellspacing=\"1\" cellpadding=\"1\"><tr><th>#</th><th>A</th><th>B</th></tr><tr><th>1</th><td bgcolor=\"#cccccc\">A1</td><td>B1</td></tr><tr><th>2</th><td>A2 € &euro; &#8364; &amp; è &egrave; </td><td>B2</td></tr><tr><th>3</th><td>A3</td><td><font color=\"#FF0000\">B3</font></td></tr></table><hr />image:<br /><img src=\"sfTCPDFPlugin/images/logo_example.png\" alt=\"test alt attribute\" width=\"100\" height=\"100\" border=\"0\" />";
-      
+          $htmlcontent  = "&lt; &euro; €àèéìòù &copy; &gt;<br /><h1>heading 1</h1><h2>heading 2</h2><h3>heading 3</h3><h4>heading 4</h4><h5>heading 5</h5><h6>heading 6</h6>ordered list:<br /><ol><li><b>bold text</b></li><li><i>italic text</i></li><li><u>underlined text</u></li><li><a href=\"http://www.tecnick.com\">link to http://www.tecnick.com</a></li><li>test break<br />second line<br />third line</li><li><font size=\"+3\">font + 3</font></li><li><small>small text</small></li><li>normal <sub>subscript</sub> <sup>superscript</sup></li></ul><hr />table:<br /><table border=\"1\" cellspacing=\"1\" cellpadding=\"1\"><tr><th>#</th><th>A</th><th>B</th></tr><tr><th>1</th><td bgcolor=\"#cccccc\">A1</td><td>B1</td></tr><tr><th>2</th><td>A2 â‚¬ &euro; &#8364; &amp; Ã¨ &egrave; </td><td>B2</td></tr><tr><th>3</th><td>A3</td><td><font color=\"#FF0000\">B3</font></td></tr></table><hr />image:<br /><img src=\"sfTCPDFPlugin/images/logo_example.png\" alt=\"test alt attribute\" width=\"100\" height=\"100\" border=\"0\" />";
+
           //create new PDF document (document units are set by default to millimeters)
           $pdf = new sfTCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true);
-      
+
           // set document information
           $pdf->SetCreator(PDF_CREATOR);
           $pdf->SetAuthor(PDF_AUTHOR);
           $pdf->SetTitle($doc_title);
           $pdf->SetSubject($doc_subject);
           $pdf->SetKeywords($doc_keywords);
-      
+
           $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
-      
+
           //set margins
           $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-      
+
           //set auto page breaks
           $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
           $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
           $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
           $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO); //set image scale factor
-      
+
           $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
           $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-      
-          $pdf->setLanguageArray($l); //set language items
-      
+
           //initialize document
           $pdf->AliasNbPages();
           $pdf->AddPage();
-      
+
           // set barcode
           $pdf->SetBarcode(date("Y-m-d H:i:s", time()));
-      
+
           // output some HTML code
-          $pdf->writeHTML($htmlcontent, true, 0);
-      
+          $pdf->writeHTML($htmlcontent , true, 0);
+
           // output two html columns
           $first_column_width = 80;
           $current_y_position = $pdf->getY();
           $pdf->writeHTMLCell($first_column_width, 0, 0, $current_y_position, "<b>hello</b>", 0, 0, 0);
           $pdf->writeHTMLCell(0, 0, $first_column_width, $current_y_position, "<i>world</i>", 0, 1, 0);
-      
+
           // output some content
           $pdf->Cell(0,10,"TEST Bold-Italic Cell",1,1,'C');
-      
+
           // output some UTF-8 test content
           $pdf->AddPage();
           $pdf->SetFont("FreeSerif", "", 12);
-      
+
           $utf8text = file_get_contents(K_PATH_CACHE. "utf8test.txt", false); // get utf-8 text form file
           $pdf->SetFillColor(230, 240, 255, true);
           $pdf->Write(5,$utf8text, '', 1);
-      
+
           // remove page header/footer
           $pdf->setPrintHeader(false);
           $pdf->setPrintFooter(false);
-      
+
           // Two HTML columns test
           $pdf->AddPage();
           $right_column = "<b>right column</b> right column right column right column right column
@@ -248,24 +252,25 @@ Where `my_config` is the config key name defined in your YAML file. (like above)
           $pdf->writeHTMLCell($first_column_width, 0, 0, 0, $left_column, 1, 0, 0);
           $pdf->Cell(0);
           $pdf->writeHTMLCell($second_column_width, 0, $first_column_width+$column_space, $current_y_position, $right_column, 0, 0, 0);
-      
+
           // add page header/footer
           $pdf->setPrintHeader(true);
           $pdf->setPrintFooter(true);
-      
+
           $pdf->AddPage();
-      
+
           // Multicell test
           $pdf->MultiCell(40, 5, "A test multicell line 1\ntest multicell line 2\ntest multicell line 3", 1, 'J', 0, 0);
           $pdf->MultiCell(40, 5, "B test multicell line 1\ntest multicell line 2\ntest multicell line 3", 1, 'J', 0);
           $pdf->MultiCell(40, 5, "C test multicell line 1\ntest multicell line 2\ntest multicell line 3", 1, 'J', 0, 0);
           $pdf->MultiCell(40, 5, "D test multicell line 1\ntest multicell line 2\ntest multicell line 3", 1, 'J', 0, 2);
           $pdf->MultiCell(40, 5, "F test multicell line 1\ntest multicell line 2\ntest multicell line 3", 1, 'J', 0);
-      
-          //Close and output PDF document
+
+          // Close and output PDF document
           $pdf->Output();
-      
-          return sfView::NONE;
+
+          // Stop symfony process
+          throw new sfStopException();
         }
 
 Demo
@@ -293,7 +298,9 @@ Support
 =======
 
 Please report bugs on the symfony TRAC, i could also answer if you ask on
-the symfony mailing list
+the symfony mailing list.
+
+Have fun, [COil](http://www.strangebuzz.com) ;)
 
 Changelog
 =========
@@ -306,7 +313,7 @@ Changelog
 
  * 2007-06-04 | 1.5.4 Stable
   * Fix Full test (sfTCPDF/test2)
-  * Customize Plugin is now possible
+  * Customizing the plugin is now possible
 
  * 2008-01-21 | 1.5.5 Stable
   * Change the constant FPDF_FONTPATH to K_PATH_FONTS for work with the last version of TCPDF (Garfield-fr)

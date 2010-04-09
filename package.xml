@@ -9,15 +9,15 @@
   </summary>
   <description>The sfTCPDFPlugin provides abstraction for the TCPDF library. The main interest of this FPDF "fork" resides in the fact that it handles any UTF8 strings witch the native encoding format used by symfony.</description>
   <lead>
-    <name>Vernet Loïc</name>
+    <name>Vernet Loic</name>
     <user>COil</user>
     <email>qrf_coil@yahoo.fr</email>
     <active>yes</active>
   </lead>
-  <date>2009-04-16</date>
+  <date>2010-04-09</date>
   <version>
-    <release>1.6.1</release>
-    <api>1.6.1</api>
+    <release>1.6.2</release>
+    <api>1.6.2</api>
   </version>
   <stability>
     <release>stable</release>
@@ -88,13 +88,14 @@
        <api>stable</api>
       </stability>
       <license uri="http://www.symfony-project.com/license">MIT license</license>
-      <date>2010-01-17</date>
+      <date>2010-04-09</date>
       <license>MIT</license>
       <notes>
-        * Modified return sfView::NONE to die (symfony bug ?)
-        * Tested plugin with TCPDF 4_8_024 (2010-01-15)
+        * Updated README and examples
+        * Modified return sfView::NONE to throw sfStopExecution
+        * Tested plugin with TCPDF 4_9_011 (2010-04-07)
         * Modifications to fit symfony cs
-        * extended with callbacks for header and footer functions added magic functions
+        * Extended with callbacks for header and footer functions added magic functions
       </notes>
     </release>  
     <release>
