@@ -42,7 +42,7 @@ The plugin comes with a *default* configuration, but you will surely want to add
    of your application. Then this file will be used.
    
  * Now, you can add your own configurations. You should keep the `default` one witch
-   is the basic configutation provided by TCPDF.
+   is the basic configuration provided by TCPDF.
    
 >**Note**
 >Note that you don't have to modify the parameters in the `# Auto-detected` section,
