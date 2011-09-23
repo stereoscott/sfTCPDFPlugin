@@ -6,6 +6,7 @@
  * @package    sfTCPDFPlugin
  * @author     Vernet Loïc aka COil <qrf_coil]at[yahoo[dot]fr>
  * @link       http://www.symfony-project.org/plugins/sfTCPDFPlugin
+ * @link       http://www.tcpdf.org
  * @link       http://sourceforge.net/projects/tcpdf/
  */
 

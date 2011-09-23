@@ -14,10 +14,10 @@
     <email>qrf_coil@yahoo.fr</email>
     <active>yes</active>
   </lead>
-  <date>2010-04-09</date>
+  <date>2011-09-24</date>
   <version>
-    <release>1.6.2</release>
-    <api>1.6.2</api>
+    <release>1.6.3</release>
+    <api>1.6.3</api>
   </version>
   <stability>
     <release>stable</release>
@@ -78,6 +78,25 @@
   </dependencies>
   <phprelease />
   <changelog>
+    <release>
+      <version>
+        <release>1.6.3</release>
+        <api>1.6.3</api>
+      </version>
+      <stability>
+       <release>stable</release>
+       <api>stable</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT license</license>
+      <date>2011-09-24</date>
+      <license>MIT</license>
+      <notes>
+        * Updated TCPDF constants for version 5_9_120
+        * Updated README and examples
+        * Tested plugin with TCPDF 5_9_120 (2011-09-22)
+        * Fixed CS and typos
+      </notes>
+    </release>
     <release>
       <version>
         <release>1.6.2</release>

@@ -7,15 +7,16 @@
  *
  * @package    sfTCPDFPlugin
  * @author     COil
- * @since      1.6.0 - 7 avr 2009
+ * @since      1.6.0 - 7 apr 2009
  */
 
 class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
 {
   // Namespace of plugin configuration
   protected static
-  $namespace           = 'sfTCPDFPlugin',
-  $config_file_pattern = 'config/pdf_configs.yml';
+    $namespace           = 'sfTCPDFPlugin',
+    $config_file_pattern = 'config/pdf_configs.yml'
+  ;
 
   /**
    * Specific yml parse function.
@@ -199,8 +200,8 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
   {
     // Supported langs by TCPDF
     $culture_to_lang_file = array(
-      'en'  => 'eng',
-      'it'  => 'ita' 
+      'en' => 'eng',
+      'it' => 'ita' 
     );
 
     $lang_file = in_array($culture, array_keys($culture_to_lang_file))
@@ -251,8 +252,10 @@ class sfTCPDFPluginConfigHandler extends sfYamlConfigHandler
       'HEAD_MAGNIFICATION',
       'K_CELL_HEIGHT_RATIO',
       'K_TITLE_MAGNIFICATION',
-      'K_SMALL_RATIO'
-      );
+      'K_SMALL_RATIO',
+      'K_THAI_TOPCHARS',
+      'K_TCPDF_CALLS_IN_HTML'
+    );
   }
 
   /**
